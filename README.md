@@ -2,8 +2,6 @@
 
 **English** | [繁體中文](#繁體中文) | [日本語](#日本語)
 
-![Status page (English UI)](docs/images/screenshot_status_en.png)
-
 *Screenshots use a simulated drive. The Err21.0 alarm shown was injected for the picture.*
 
 ***
