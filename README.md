@@ -1,5 +1,7 @@
 # Yauyih A6 Modbus Tool Web Edition
 
+https://kikiqqp.github.io/MINAS-A6-Modbus-Tool-Web-Edition/
+
 **English** | [繁體中文](#繁體中文) | [日本語](#日本語)
 
 ***
