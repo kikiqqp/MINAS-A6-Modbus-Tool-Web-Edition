@@ -2,15 +2,13 @@
 
 **English** | [繁體中文](#繁體中文) | [日本語](#日本語)
 
-*Screenshots use a simulated drive. The Err21.0 alarm shown was injected for the picture.*
-
 ***
 
 ## English
 
 A browser based Modbus RTU test and commissioning tool for Panasonic MINAS A6 series servo drives. The whole tool is one HTML file. There is nothing to install and no server to run: open it in Chrome or Edge, authorize a serial port, and the page talks to the drive directly through the Web Serial API.
 
-It is built from the Panasonic MINAS A6 / A6L Modbus communication manual (SX-DSV03042) and keeps the window layout of an earlier Windows Forms (C#) version, so people who used that version can find everything in the same place.
+It is built from the Panasonic Technical Reference "Modbus communication and Block operation Specification" (SX-DSV03042, for the MINAS A6 / A6L series) and keeps the window layout of an earlier Windows Forms (C#) version, so people who used that version can find everything in the same place.
 
 ### Features
 
@@ -54,10 +52,6 @@ These settings follow manual SX-DSV03042. The values on the screen must match th
 
 ### Screens
 
-![Block motion parameters (Traditional Chinese UI)](docs/images/screenshot_block_parameters_zhTW.png)
-
-![Block motion planning (Japanese UI)](docs/images/screenshot_block_planning_ja.png)
-
 * **Status Page** and **Status Page2** show live values and the I/O lamps.
 * **BLOCK Motion Parameters** edits the shared parameters of the Block function. Click `Read` before `Write`. `EEP` stores the values in the drive's EEPROM after confirmation.
 * **BLOCK Motion Planning** edits the 256 Block commands. `Check` looks for Blocks that refer to a velocity or acceleration set whose value is 0, which would cause Err93.1.
@@ -92,17 +86,18 @@ The interface supports Traditional Chinese (zh-TW), Simplified Chinese (zh-CN), 
 
 During development the tool was exercised with automated tests against a simulated A6 drive, in a simulated browser environment (jsdom) and in a real Chromium browser. These tests cover the CRC16 example from the manual, the supported function codes, exception handling, Block read, write and read back, the firmware fallback, trial operation, language switching and the layout in all four languages. A simulation cannot replace real hardware. Behavior depends on your drive model, firmware version and wiring, so please verify on your own equipment first and start with a motor that is not connected to a load.
 
-### Notes for forks and customization
-
-The title bar logo is drawn with CSS, and a small integrity check watches it. If the logo is deleted, hidden, recolored, reshaped or covered, the tool closes the connection safely and shows a lock screen. This is only a deterrent against casual editing. It does not stop someone who edits the code itself. If you want to replace the logo, change the `.brandLogo` rules in the style block and `BRAND_LOGO_SPEC` in the script together, otherwise the tool will lock itself.
-
 ### Disclaimer
 
-This is an independent project. It is not affiliated with, endorsed by or supported by Panasonic. Panasonic and MINAS are trademarks of their respective owners. The software is provided as is, without warranty of any kind. You are responsible for the safety of your machine and for any damage or injury caused by its use.
+The software is provided as is, without warranty of any kind. You are responsible for the safety of your machine and for any damage or injury caused by its use.
 
-### License
+### License and trademarks
 
-To be decided by the author. Add a `LICENSE` file to this repository before sharing it.
+The source code is released under the MIT License. See `LICENSE` for the full text (the English text is the only legally binding version) and `NOTICE.md` for the trademark and third party notices in detail.
+
+* **MINAS and Panasonic belong to Panasonic.** Panasonic, MINAS, PANATERM and related product names and logos are trademarks or registered trademarks of Panasonic Holdings Corporation, Panasonic Industry Co., Ltd. or other Panasonic group companies. This is an independent project. It is not made, approved, sponsored or supported by Panasonic. The names are used only to say which products the tool works with.
+* **The Panasonic manual is not included.** The Technical Reference (SX-DSV03042) is copyrighted by Panasonic Industry Co., Ltd. and is not part of this repository. Please obtain it from Panasonic.
+* **Other names.** Modbus, Windows, Chrome, Edge, Safari, GitHub and other names mentioned here belong to their respective owners.
+* **Yauyih name and logo.** The MIT License covers the code. It does not give you the right to use the Yauyih name or logo as your own brand, or to suggest that your version is approved by the author.
 
 ***
 
@@ -110,7 +105,7 @@ To be decided by the author. Add a `LICENSE` file to this repository before shar
 
 這是一套在瀏覽器裡執行的松下 MINAS A6 系列伺服驅動器 Modbus RTU 測試與調機工具。整個工具只有一個 HTML 檔，不用安裝，也不用架設伺服器：用 Chrome 或 Edge 開啟，授權序列埠，網頁就會透過 Web Serial API 直接和驅動器通訊。
 
-本工具依據松下 MINAS A6 / A6L 的 Modbus 通訊手冊（SX-DSV03042）製作，並沿用先前 Windows Forms（C#）版本的視窗配置，用過舊版的人可以在原來的位置找到所有功能。
+本工具依據松下技術參考文件「Modbus communication and Block operation Specification」（SX-DSV03042，適用 MINAS A6 / A6L 系列）製作，並沿用先前 Windows Forms（C#）版本的視窗配置，用過舊版的人可以在原來的位置找到所有功能。
 
 ### 功能特色
 
@@ -154,10 +149,6 @@ To be decided by the author. Add a `LICENSE` file to this repository before shar
 
 ### 畫面說明
 
-![Block 動作參數（繁體中文介面）](docs/images/screenshot_block_parameters_zhTW.png)
-
-![Block 動作規劃（日文介面）](docs/images/screenshot_block_planning_ja.png)
-
 * **Status Page** 與 **Status Page2** 顯示即時數值與輸入輸出燈號。
 * **BLOCK Motion Parameters** 編輯 Block 功能共用的參數。寫入前請先按 `Read`。`EEP` 在確認後把數值存入驅動器的 EEPROM。
 * **BLOCK Motion Planning** 編輯 256 個 Block 命令。`Check` 會檢查是否有 Block 引用到數值為 0 的速度或加減速組，這會造成 Err93.1。
@@ -192,17 +183,18 @@ To be decided by the author. Add a `LICENSE` file to this repository before shar
 
 開發過程中，以模擬的 A6 驅動器，搭配模擬的瀏覽器環境（jsdom）與真實的 Chromium 瀏覽器執行自動化測試，涵蓋手冊中的 CRC16 範例、支援的功能碼、例外處理、Block 讀取、寫入與讀回、韌體相容、試運轉、語言切換，以及四種語言的版面。模擬無法取代真實硬體，實際行為會因驅動器型號、韌體版本與接線而不同，請先在自己的設備上驗證，並從未連接負載的馬達開始。
 
-### 給分支與客製化的說明
-
-標題列的 LOGO 是用 CSS 繪製的，並有一小段完整性檢查在監看它。LOGO 被刪除、隱藏、改色、改形狀或被遮蓋時，工具會先安全關閉連線，再顯示鎖定畫面。這只能嚇阻隨手修改，擋不住直接改程式碼的人。若要更換 LOGO，請同時修改樣式區塊裡的 `.brandLogo` 規則與程式中的 `BRAND_LOGO_SPEC`，否則工具會把自己鎖住。
-
 ### 免責聲明
 
-這是獨立專案，與松下沒有隸屬、背書或支援關係。Panasonic 與 MINAS 是其各自所有人的商標。本軟體依現狀提供，不附帶任何形式的保證。機械的安全，以及使用本工具造成的任何損壞或傷害，由使用者自行負責。
+本軟體依現狀提供，不附帶任何形式的保證。機械的安全，以及使用本工具造成的任何損壞或傷害，由使用者自行負責。
 
-### 授權
+### 授權與商標
 
-由作者決定。分享此儲存庫之前，請先加入 `LICENSE` 檔案。
+原始碼以 MIT 授權釋出，完整條文請見 `LICENSE`（僅英文版本具有法律效力），商標與第三方聲明的詳細內容請見 `NOTICE.md`。
+
+* **MINAS 與 Panasonic 屬於松下。** Panasonic、MINAS、PANATERM 及相關產品名稱與標誌，是 Panasonic Holdings Corporation、Panasonic Industry Co., Ltd. 或松下集團其他公司的商標或註冊商標。本專案為獨立專案，並非由松下製作、認可、贊助或提供支援，文中使用這些名稱只是為了說明本工具適用於哪些產品。
+* **不附松下手冊。** 技術參考文件（SX-DSV03042）的著作權屬於 Panasonic Industry Co., Ltd.，不包含在此儲存庫中，請向松下取得。
+* **其他名稱。** 文中提到的 Modbus、Windows、Chrome、Edge、Safari、GitHub 等名稱，屬於其各自的所有人。
+* **Yauyih 名稱與 LOGO。** MIT 授權涵蓋的是程式碼，並不授予您把 Yauyih 名稱或 LOGO 當成自己的品牌使用，或暗示您的版本經作者認可的權利。
 
 ***
 
@@ -210,7 +202,7 @@ To be decided by the author. Add a `LICENSE` file to this repository before shar
 
 Panasonic MINAS A6 シリーズのサーボドライバを、ブラウザだけで Modbus RTU 通信して試験、調整するためのツールです。ツール全体が 1 つの HTML ファイルで、インストールもサーバーも要りません。Chrome または Edge で開いてシリアルポートを許可すると、Web Serial API を通じてドライバと直接通信します。
 
-Panasonic の MINAS A6 / A6L Modbus 通信マニュアル（SX-DSV03042）に基づいて作られており、以前の Windows Forms（C#）版と同じ画面レイアウトを引き継いでいるため、旧版を使っていた方は同じ場所で同じ機能を見つけられます。
+Panasonic の技術資料「Modbus communication and Block operation Specification」（SX-DSV03042、MINAS A6 / A6L シリーズ対象）に基づいて作られており、以前の Windows Forms（C#）版と同じ画面レイアウトを引き継いでいるため、旧版を使っていた方は同じ場所で同じ機能を見つけられます。
 
 ### 主な機能
 
@@ -254,10 +246,6 @@ Panasonic の MINAS A6 / A6L Modbus 通信マニュアル（SX-DSV03042）に基
 
 ### 画面について
 
-![Block 動作パラメータ（繁体字中国語の画面）](docs/images/screenshot_block_parameters_zhTW.png)
-
-![Block 動作プラン（日本語の画面）](docs/images/screenshot_block_planning_ja.png)
-
 * **Status Page** と **Status Page2** はリアルタイムの値と入出力ランプを表示します。
 * **BLOCK Motion Parameters** は Block 機能で共通のパラメータを編集します。書き込みの前に必ず `Read` を押してください。`EEP` は確認のあと、値をドライバの EEPROM に保存します。
 * **BLOCK Motion Planning** は 256 個の Block コマンドを編集します。`Check` は、値が 0 の速度または加減速の組を参照している Block を探します。これは Err93.1 の原因になります。
@@ -292,14 +280,15 @@ Panasonic の MINAS A6 / A6L Modbus 通信マニュアル（SX-DSV03042）に基
 
 開発中は、模擬の A6 ドライバを使い、シミュレートしたブラウザ環境（jsdom）と実際の Chromium ブラウザで自動テストを行いました。対象は、マニュアルにある CRC16 の例、対応ファンクションコード、例外処理、Block の読み出し、書き込み、読み戻し、ファームウェア互換、試運転、言語切り替え、4 言語での画面レイアウトです。シミュレーションは実機の代わりにはなりません。実際の動作はドライバの型式、ファームウェアのバージョン、配線によって異なりますので、必ずご自身の設備で確認し、負荷を接続していないモータから始めてください。
 
-### フォークとカスタマイズについて
-
-タイトルバーのロゴは CSS で描かれており、小さな整合性チェックが監視しています。ロゴが削除、非表示、変色、変形、または他の要素で覆われると、ツールは安全に接続を閉じてロック画面を表示します。これは気軽な改変を抑止するためだけのもので、コードそのものを書き換える人を止めることはできません。ロゴを差し替える場合は、スタイルブロックの `.brandLogo` ルールとスクリプトの `BRAND_LOGO_SPEC` を一緒に変更してください。そうしないとツールが自らロックされます。
-
 ### 免責事項
 
-これは独立したプロジェクトであり、Panasonic とは提携、承認、サポートの関係にありません。Panasonic および MINAS は、それぞれの所有者の商標です。本ソフトウェアは現状のまま提供され、いかなる保証もありません。機械の安全、および本ツールの使用によって生じた損害や傷害については、使用者が責任を負います。
+本ソフトウェアは現状のまま提供され、いかなる保証もありません。機械の安全、および本ツールの使用によって生じた損害や傷害については、使用者が責任を負います。
 
-### ライセンス
+### ライセンスと商標
 
-作者が決定します。このリポジトリを共有する前に `LICENSE` ファイルを追加してください。
+ソースコードは MIT ライセンスで公開しています。全文は `LICENSE` をご覧ください（法的な効力を持つのは英語版のみです）。商標とサードパーティに関する詳しい表記は `NOTICE.md` にあります。
+
+* **MINAS と Panasonic は Panasonic のものです。** Panasonic、MINAS、PANATERM および関連する製品名とロゴは、Panasonic Holdings Corporation、Panasonic Industry Co., Ltd. またはパナソニックグループ各社の商標または登録商標です。本プロジェクトは独立したものであり、Panasonic が製作、承認、後援、サポートしているものではありません。これらの名称は、本ツールが対応する製品を示すためだけに使っています。
+* **Panasonic のマニュアルは含まれません。** 技術資料（SX-DSV03042）の著作権は Panasonic Industry Co., Ltd. にあり、このリポジトリには含まれていません。Panasonic から入手してください。
+* **その他の名称。** ここに登場する Modbus、Windows、Chrome、Edge、Safari、GitHub などの名称は、それぞれの所有者のものです。
+* **Yauyih の名称とロゴ。** MIT ライセンスが対象とするのはコードです。Yauyih の名称やロゴを自分のブランドとして使うこと、または自分のバージョンが作者に承認されているかのように示すことを許可するものではありません。
